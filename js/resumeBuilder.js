@@ -85,3 +85,53 @@ var projects = [{
     "images":["images/me.jpg","images/fry.jpg"]
 }]
 
+
+// add Skills (Lesson 5.1)
+if ( bio.skills.length ) {
+    $('#header').append(HTMLskillsStart);
+    for (i=0;i<bio.skills.length;i++) {
+         formattedSkill=HTMLskills.replace("%data%",bio.skills[i]);
+          $("#header").append(formattedSkill);
+    }
+
+    HTMLskills 
+}
+
+
+function displayWork() {
+// add Jobs (Lesson 5.4)
+    work.jobs.forEach(function(job) {
+        $("#workExperience").append(HTMLworkStart);
+
+        var formattedEmployer = HTMLworkEmployer.replace("%data%", job.employer);
+        var formattedTitle = HTMLworkTitle.replace("%data%", job.title);
+        var formattedEmpTitle = formattedEmployer + formattedTitle;
+        var formattedWorkDates = HTMLworkDates.replace("%data%",job.dates);
+        var formattedWorkLocation = HTMLworkLocation.replace("%data%",job.location);
+        var formattedWorkDescription = HTMLworkDescription.replace("%data%",job.description);
+
+        $(".work-entry:last").append(formattedEmpTitle).append(formattedWorkDates).append(formattedWorkLocation).append(formattedWorkDescription);
+    })
+}
+
+displayWork();
+
+
+
+// add Click Metrics (Lesson 5.9)
+$(document).click(function(loc) {
+    // my code goes here using logClicks(x,y)
+    logClicks(loc.pageX, loc.pageY)
+});
+
+// append Internatiolize Name
+$("#main").append(internationalizeButton);
+
+var inName = function(oldName) {
+    console.log("In Function inName");
+    var names = oldName.split(" ");
+    console.log(typeof(names[0]));
+    names[0] = names[0].slice(0,1).toUpperCase() + names[0].slice(1).toLowerCase();
+    names[1] = names[1].toUpperCase();
+    return names.join(" ");
+}
