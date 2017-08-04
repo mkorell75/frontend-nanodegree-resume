@@ -78,12 +78,17 @@ var work = {
 
 
 var projects = [{
-    // projekcts: array of objects with title, dates and descriptions, and an images array with URL strings for projekt images
-    "title":"e-Business Hosting",
-    "dates":"In the very beginning",
-    "description":"Das war noch bei Frau Leichtl",
-    "images":["images/me.jpg","images/fry.jpg"]
-}]
+    // projects: array of objects with title, dates and descriptions, and an images array with URL strings for projekt images
+        "title":"e-Business Hosting",
+        "dates":"In the very beginning",
+        "description":"Das war noch bei Frau Leichtl",
+        "images":[]
+    },{
+        "title":"Content Manager Migration",
+        "dates":"2012 - 2016",
+        "description":"Das war noch bei Frau Leichtl",
+        "images":["images/fry.jpg"]
+    }    ];
 
 
 // add Skills (Lesson 5.1)
@@ -135,3 +140,45 @@ var inName = function(oldName) {
     names[1] = names[1].toUpperCase();
     return names.join(" ");
 }
+
+
+
+// displaying Projects not as a function, but as part of the "projects" object. 
+
+projects["display"] = function () {
+        /* from helper.js: 
+        var HTMLprojectStart = '<div class="project-entry"></div>';
+        var HTMLprojectTitle = '<a href="#">%data%</a>';
+        var HTMLprojectDates = '<div class="date-text">%data%</div>';
+        var HTMLprojectDescription = '<p><br>%data%</p>';
+        var HTMLprojectImage = '<img src="%data%">';
+        
+        from index.html: 
+        <div id="projects">
+        <h2>Projects</h2>
+
+        */
+        projects.forEach(function(proj) {
+            formattedProjectTitle=HTMLprojectTitle.replace("%data%",proj.title);
+            formattedProjectDates=HTMLprojectDates.replace("%data%",proj.dates);
+            formattedProjectDescription=HTMLprojectDescription.replace("%data%",proj.description);
+            
+            
+            $('#projects').append(HTMLprojectStart);
+            $('.project-entry:last').append(formattedProjectTitle);
+            $('.project-entry:last').append(formattedProjectDates);
+            $('.project-entry:last').append(formattedProjectDescription);
+            proj.images.forEach(function(image) {
+                formattedProjectImage=HTMLprojectImage.replace("%data%",image);
+                $('.project-entry:last').append(formattedProjectImage);
+            })
+            
+        })
+}
+
+projects.display();
+
+
+
+// displaying google Map
+$("#mapDiv").append(googleMap);
